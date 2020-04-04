@@ -1,0 +1,69 @@
+#include<stdio.h>
+typedef struct Number
+{
+	int data;
+	struct Number* right;
+	struct Number* left;
+}number;
+
+number* creat()
+{
+	number* newNode = (number*)malloc(sizeof(number));
+	scanf_s("%d", &newNode->data);
+	newNode->data = NULL;
+	newNode->right = NULL;
+	return newNode;
+}
+void link(number* root, number* left, number* right)
+{
+	root->left = left;
+	root->right = right;
+}
+void midbrowse(number* root)
+{
+	number* backups = root;
+	printf("%d", backups->data);
+	if (backups->right)
+		midbrowse(backups->right);
+	if (backups->left)
+		midbrowse(backups->left);
+}
+void leftbrowse(number* root)
+{
+	number* backups = root;
+	if (backups->left)
+		midbrowse(backups->left);
+	printf("%d", backups->data);
+	if (backups->right)
+		midbrowse(backups->right);
+}
+void rightbrows(number* root)
+{
+	number* backups = root;
+	if (backups->right)
+		midbrowse(backups->right);
+	printf("%d", backups->data);
+	if (backups->left)
+		midbrowse(backups->left);
+}
+int main()
+{
+	number* a = (number*)malloc(sizeof(number));
+	number* b = (number*)malloc(sizeof(number));
+	number* c = (number*)malloc(sizeof(number));
+	number* d = (number*)malloc(sizeof(number));
+	number* e = (number*)malloc(sizeof(number));
+	number* f = (number*)malloc(sizeof(number));
+	link(a, b, c);
+	link(b, d, e);
+	link(c, f, NULL);
+	int key = scanf_s("%d", &key);
+	printf("请输入遍历方式 左序遍历请安1 中序遍历请按2 右序遍历请按3");
+	switch (key)
+	{
+	case 1:leftbrowse(a); break;
+	case 2:midbrowse(a); break;
+	case 3:rightbrows(a); break;
+	}
+	return 0;
+}
